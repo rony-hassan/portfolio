@@ -1,39 +1,18 @@
 import Navbar from "@/components/navbar";
-import AnimatedButton from "@/components/animated-button";
-
+import Hero from "@/components/hero";
+import SocialSidebar from "@/components/social-sidebar";
 
 export default function Home() {
   return (
     <>
       <Navbar />
+      <SocialSidebar />
 
-      <main className="pt-24 max-w-6xl mx-auto px-6">
-        <section className="min-h-[70vh] flex flex-col justify-center">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            Hi, I’m <span className="text-indigo-500">Rony</span> 👋
-          </h1>
+      {/* Hero Section */}
+      <Hero />
 
-          <p className="mt-4 text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-2xl">
-            Aspiring SQA Engineer skilled in Manual Testing, Automation Testing
-            (Python + Selenium), API Testing, and Performance Testing.
-          </p>
-
-          <div className="mt-6 flex gap-4">
-            <AnimatedButton
-              href="#projects"
-              bgLight="bg-indigo-600"
-              bgDark="dark:bg-indigo-500"
-            >
-              View Projects
-            </AnimatedButton>
-
-            <AnimatedButton href="#contact">
-              Contact Me
-            </AnimatedButton>
-          </div>
-
-        </section>
-
+      {/* Other Sections */}
+      <main className="max-w-6xl mx-auto px-6">
         <section id="about" className="py-20">
           <h2 className="text-3xl font-bold mb-4">About Me</h2>
           <p className="text-slate-700 dark:text-slate-300 max-w-3xl">
