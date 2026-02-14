@@ -30,15 +30,15 @@ const certificatesData: CertificateItem[] = [
     image: "/certificates/sqa-training.jpg",
     description:
       "Completed a 360-hour Software Quality Assurance training program including manual testing, automation basics, API testing, and real project testing.",
-    badge: "Verified",
+    badge: "Training",
   },
   {
-    id: "dean-award",
+    id: "dean-award-1",
     title: "Dean’s Award",
     issuer: "University",
-    date: "2024",
+    date: "2022",
     category: "Awards",
-    image: "/certificates/dean-award.jpg",
+    image: "/certificates/dean-award-2.jpg",
     description:
       "Awarded for outstanding academic performance and excellence in university semester results.",
     badge: "Honor",
@@ -47,7 +47,7 @@ const certificatesData: CertificateItem[] = [
     id: "vc-award",
     title: "Vice Chancellor Award",
     issuer: "University",
-    date: "2024",
+    date: "2022",
     category: "Awards",
     image: "/certificates/vc-award.jpg",
     description:
@@ -55,12 +55,23 @@ const certificatesData: CertificateItem[] = [
     badge: "Top Performer",
   },
   {
+    id: "dean-award-2",
+    title: "Dean’s Award",
+    issuer: "University",
+    date: "2024",
+    category: "Awards",
+    image: "/certificates/dean-award-1.jpg",
+    description:
+      "Awarded for outstanding academic performance and excellence in university semester results.",
+    badge: "Honor",
+  },
+  {
     id: "it-competition",
     title: "IT Competition (3rd Place)",
-    issuer: "IT Fest / Competition Board",
-    date: "2023",
+    issuer: "GUB CSE Carnival",
+    date: "2024",
     category: "Competitions",
-    image: "/certificates/it-competition.jpg",
+    image: "/certificates/it-award.jpg",
     description:
       "Achieved 3rd place in an IT competition showcasing problem-solving, development, and teamwork skills.",
     badge: "3rd Place",
@@ -68,18 +79,18 @@ const certificatesData: CertificateItem[] = [
 
   // Add more later (example placeholders)
   {
-    id: "online-course-1",
-    title: "Software Testing Fundamentals",
-    issuer: "Online Platform",
-    date: "2024",
-    category: "Courses",
-    image: "/certificates/course-1.jpg",
+    id: "digital-skills-course",
+    title: "Pyhton(Django)",
+    issuer: "EDGE Digital Skills Training",
+    date: "2025",
+    category: "Training",
+    image: "/certificates/python-django-certificate.jpg",
     description:
-      "Learned testing lifecycle, test case writing, bug reporting, and quality assurance best practices.",
-    badge: "Course",
+      "Learned Python and Django fundamentals including web development, database integration, and deployment.",
+    badge: "Training",
     credentialLink: "",
   },
-  {
+  /*{
     id: "online-course-2",
     title: "Automation Testing Basics",
     issuer: "Online Platform",
@@ -90,7 +101,7 @@ const certificatesData: CertificateItem[] = [
       "Covered automation fundamentals including Selenium basics, frameworks, and test execution.",
     badge: "Course",
     credentialLink: "",
-  },
+  },*/
 ];
 
 function getCategoryIcon(category: CertificateItem["category"]) {
@@ -360,11 +371,11 @@ export default function Certificates() {
                     </a>
                   )}
 
-                  {!selected.credentialLink && (
+                  {/*{!selected.credentialLink && (
                     <p className="mt-6 text-xs text-slate-500 dark:text-slate-400">
                       Credential verification link not available.
                     </p>
-                  )}
+                  )} */}
                 </div>
               </div>
 

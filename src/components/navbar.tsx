@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import ThemeToggle from "./theme-toggle";
+//import ThemeToggle from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -100,7 +100,7 @@ export default function Navbar() {
 
         {/* Right: Theme + Mobile Toggle */}
         <div className="flex items-center gap-4">
-          <ThemeToggle />
+          {/*<ThemeToggle />*/}
 
           {/* Mobile Hamburger */}
           <button
