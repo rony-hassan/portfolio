@@ -14,7 +14,7 @@ import {
 
 type Skill = {
   title: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
   points: string[];
   category: string;
 };

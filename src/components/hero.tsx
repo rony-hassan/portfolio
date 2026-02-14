@@ -85,7 +85,7 @@ export default function Hero() {
       </AnimatePresence>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/20"></div>
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
@@ -148,10 +148,11 @@ export default function Hero() {
         </div>
 
         <div className="flex gap-3">
-          {slides.map((_, i) => (
+          {slides.map((slide, i) => (
             <button
               key={i}
               onClick={() => setIndex(i)}
+              aria-label={`Go to slide ${i + 1}: ${slide.title} ${slide.highlight || ""}`}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 i === index ? "bg-indigo-400 scale-125" : "bg-white/40"
               }`}

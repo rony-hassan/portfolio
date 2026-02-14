@@ -87,7 +87,7 @@ export default function Footer() {
 
       {/* Gradient Pulse Line */}
       <motion.div
-        className="h-1 w-16 mx-auto mb-2 rounded-full bg-gradient-to-r from-indigo-500 via-pink-500 to-green-400"
+        className="h-1 w-16 mx-auto mb-2 rounded-full bg-linear-to-r from-indigo-500 via-pink-500 to-green-400"
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
         style={{ backgroundSize: "200% 100%" }}
