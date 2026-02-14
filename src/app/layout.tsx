@@ -1,5 +1,5 @@
 import "./globals.css";
-import ThemeProviderWrapper from "@/components/theme-provider";
+//import ThemeProviderWrapper from "@/components/theme-provider";
 
 export const metadata = {
     title: "Rony | Portfolio",
