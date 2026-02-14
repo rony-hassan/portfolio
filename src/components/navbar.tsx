@@ -9,7 +9,9 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
+  { href: "#certificates", label: "Certificates" }, // future section
   { href: "#contact", label: "Contact" },
 ];
 
@@ -18,17 +20,25 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
 
-  // Track scroll
+  // Smooth scroll function
+  const handleScrollToSection = (href: string) => {
+    const section = document.querySelector(href);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+    setMobileOpen(false);
+  };
+
+  // Track scroll & active section
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
 
-      // Detect active section
       navLinks.forEach((link) => {
         const section = document.querySelector(link.href);
         if (section) {
           const top = section.getBoundingClientRect().top;
-          if (top <= 100 && top >= -200) {
+          if (top <= 120 && top >= -250) {
             setActiveSection(link.href);
           }
         }
@@ -45,35 +55,45 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed w-full z-50 top-0 backdrop-blur-md transition-all duration-300
-        ${scrollY > 50 ? "bg-white/70 dark:bg-[#0b0f19]/70 shadow-md" : "bg-transparent"}
+        ${
+          scrollY > 50
+            ? "bg-white/70 dark:bg-[#0b0f19]/70 shadow-md"
+            : "bg-transparent"
+        }
       `}
     >
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center h-20">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-indigo-500">
+        <button
+          onClick={() => handleScrollToSection("#home")}
+          className="text-2xl font-bold text-indigo-500 cursor-pointer"
+        >
           Rony
-        </Link>
+        </button>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex gap-6">
+        <ul className="hidden md:flex gap-7">
           {navLinks.map((link) => (
             <li key={link.href} className="relative group">
-              <Link
-                href={link.href}
-                className={`font-medium transition-colors duration-300 ${
+              <button
+                onClick={() => handleScrollToSection(link.href)}
+                className={`font-medium transition-colors duration-300 cursor-pointer ${
                   activeSection === link.href
                     ? "text-indigo-500"
                     : "text-slate-900 dark:text-white hover:text-indigo-500"
                 }`}
               >
                 {link.label}
+
                 {/* Animated underline */}
                 <span
-                  className={`absolute left-0 -bottom-1 h-[2px] bg-indigo-500 transition-all duration-300 ${
-                    activeSection === link.href ? "w-full" : "w-0 group-hover:w-full"
+                  className={`absolute left-0 -bottom-1 h-0.5 bg-indigo-500 transition-all duration-300 ${
+                    activeSection === link.href
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
                   }`}
                 ></span>
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
@@ -98,21 +118,20 @@ export default function Navbar() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden flex flex-col gap-4 px-6 py-4 bg-white dark:bg-[#0b0f19]/90 shadow-md"
+          className="md:hidden flex flex-col gap-4 px-6 py-5 bg-white dark:bg-[#0b0f19]/90 shadow-md"
         >
           {navLinks.map((link) => (
             <li key={link.href}>
-              <Link
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className={`block font-medium py-2 transition-colors duration-300 ${
+              <button
+                onClick={() => handleScrollToSection(link.href)}
+                className={`block w-full text-left font-medium py-2 transition-colors duration-300 ${
                   activeSection === link.href
                     ? "text-indigo-500"
                     : "text-slate-900 dark:text-white hover:text-indigo-500"
                 }`}
               >
                 {link.label}
-              </Link>
+              </button>
             </li>
           ))}
         </motion.ul>

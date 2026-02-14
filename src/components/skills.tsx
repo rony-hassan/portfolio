@@ -64,7 +64,7 @@ const skills: Skill[] = [
     ],
     category: "Performance",
   },
-  {
+  /*{
     title: "Database & SQL",
     icon: <Database size={22} />,
     points: [
@@ -74,7 +74,7 @@ const skills: Skill[] = [
       "Joins & Filtering",
     ],
     category: "Database",
-  },
+  },*/
   {
     title: "Version Control",
     icon: <GitBranch size={22} />,
@@ -99,7 +99,7 @@ const skills: Skill[] = [
   },
 ];
 
-const categories = ["All", "Manual", "Automation", "Performance", "Database", "Tools", "Mindset"];
+const categories = ["All", "Manual", "Automation", "Performance", "Tools", "Mindset"];
 
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState("All");

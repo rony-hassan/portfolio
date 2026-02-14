@@ -70,7 +70,7 @@ export default function Hero() {
   }, [index]);
 
   return (
-    <section className="relative w-full h-[80vh] overflow-hidden flex items-center">
+    <section id="home" className="relative w-full h-[80vh] overflow-hidden flex items-center">
       {/* Background Slider with parallax */}
       <AnimatePresence mode="wait">
         <motion.div
