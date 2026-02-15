@@ -1,165 +1,114 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import AnimatedButton from "@/components/animated-button";
 
-const slides = [
-  {
-    title: "Hi, I’m ",
-    highlight: "Rony 👋",
-    subtitle: "Aspiring SQA Engineer | Manual & Automation Testing",
-    tagline:
-      "Turning bugs into quality software through structured testing, automation frameworks, and continuous learning.",
-    bg: "/hero/bg1.webp",
-  },
-  {
-    title: "Automation Testing 🚀",
-    subtitle: "Python + Selenium + Pytest (POM Framework)",
-    tagline:
-      "Building scalable automation suites for regression testing with clean architecture, reusable components, and stable execution.",
-    bg: "/hero/bg2.webp",
-  },
-  {
-    title: "API & Performance Testing ⚡",
-    subtitle: "Postman | JMeter | Quality Assurance Mindset",
-    tagline:
-      "Ensuring backend reliability through API validation and measuring performance under real-world user loads.",
-    bg: "/hero/bg3.webp",
-  },
+const roles = [
+  "Aspiring SQA Engineer",
+  "Manual Testing Specialist",
+  "Automation Tester (Python + Selenium)",
+  "API & Performance Tester",
 ];
 
 export default function Hero() {
-  const [index, setIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-
-  const SLIDE_DURATION = 6000;
-  const PROGRESS_INTERVAL = 50;
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const translateX = useTransform(mouseX, [-500, 500], [-10, 10]);
-  const translateY = useTransform(mouseY, [-500, 500], [-10, 10]);
-
+  const [text, setText] = useState("");
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      mouseX.set(e.clientX - window.innerWidth / 2);
-      mouseY.set(e.clientY - window.innerHeight / 2);
-    };
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, [mouseX, mouseY]);
+    const currentRole = roles[roleIndex];
+    const typingSpeed = isDeleting ? 40 : 80;
 
-  useEffect(() => {
-    setProgress(0);
-    const progressStep = 100 / (SLIDE_DURATION / PROGRESS_INTERVAL);
+    const timeout = setTimeout(() => {
+      setText((prev) =>
+        isDeleting
+          ? currentRole.substring(0, prev.length - 1)
+          : currentRole.substring(0, prev.length + 1)
+      );
 
-    const progressTimer = setInterval(() => {
-      setProgress((prev) => Math.min(prev + progressStep, 100));
-    }, PROGRESS_INTERVAL);
+      if (!isDeleting && text === currentRole) {
+        setTimeout(() => setIsDeleting(true), 1200);
+      }
 
-    const slideTimer = setTimeout(() => {
-      setIndex((prev) => (prev + 1) % slides.length);
-    }, SLIDE_DURATION);
+      if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }
+    }, typingSpeed);
 
-    return () => {
-      clearInterval(progressTimer);
-      clearTimeout(slideTimer);
-    };
-  }, [index]);
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, roleIndex]);
 
   return (
-    <section id="home" className="relative w-full h-[80vh] overflow-hidden flex items-center">
-      {/* Background Slider with parallax */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={slides[index].bg}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${slides[index].bg})`, x: translateX, y: translateY }}
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1.02 }}
-          exit={{ opacity: 0, scale: 1.08 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+    <section id="home" className="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden bg-[#020617]">
+      
+      {/* SQA Digital Environment Background */}
+      <div className="absolute inset-0 z-0">
+        {/* The Animated Grid */}
+        <div 
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px)`,
+            backgroundSize: '50px 50px',
+            maskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)'
+          }}
+        ></div>
+
+        {/* The Scanning Line Animation */}
+        <motion.div 
+          initial={{ translateY: "-100%" }}
+          animate={{ translateY: "1000%" }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent z-1"
         />
-      </AnimatePresence>
+        
+        {/* Subtle Static Noise/Texture for a "Monitor" feel */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/20"></div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 max-w-4xl"
+      >
+        {/* Status Badge */}
+        {/*<div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          System Status: Ready for Deployment
+        </div>*/}
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="max-w-2xl"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.7 }}
-            >
-              <h1 className="text-3xl md:text-4xl lg:text-4.5xl font-bold text-white leading-snug">
-                    {slides[index].title}
-                    <motion.span
-                        className="text-indigo-400 relative after:absolute after:left-0 after:-bottom-1 after:h-1 after:w-full after:bg-indigo-400 after:rounded-full after:origin-left"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        {slides[index].highlight || ""}
-                    </motion.span>
-                </h1>
+        <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight">
+          Hi, I'm{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-cyan-300">
+            Rony
+          </span>
+        </h1>
 
-
-              <h2 className="mt-4 text-lg md:text-2xl font-medium text-indigo-300">
-                {slides[index].subtitle}
-              </h2>
-
-              <p className="mt-4 text-base md:text-lg text-slate-200 leading-relaxed">
-                {slides[index].tagline}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Buttons */}
-          <div className="mt-8 flex gap-4">
-            <AnimatedButton href="#projects" bgLight="bg-indigo-600" bgDark="dark:bg-indigo-500">
-              View Projects
-            </AnimatedButton>
-
-            <AnimatedButton href="#contact">Contact Me</AnimatedButton>
+        <div className="mt-8 flex flex-col items-center">
+          <div className="font-mono text-lg md:text-xl text-cyan-400 flex items-center gap-2">
+            <span className="bg-slate-900 border border-slate-700 px-4 py-2 rounded-2xl shadow-xl">
+              {text}<span className="animate-pulse text-white">_</span>
+            </span>
           </div>
-        </motion.div>
-      </div>
-
-      {/* Progress Bar + Dots */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4 w-[320px]">
-        <div className="w-full h-1.25 bg-white/20 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-indigo-400 rounded-full"
-            animate={{ width: `${progress}%` }}
-            transition={{ ease: "linear", duration: 0.1 }}
-          />
         </div>
 
-        <div className="flex gap-3">
-          {slides.map((slide, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              aria-label={`Go to slide ${i + 1}: ${slide.title} ${slide.highlight || ""}`}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                i === index ? "bg-indigo-400 scale-125" : "bg-white/40"
-              }`}
-            />
-          ))}
+        <p className="mt-10 text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          Bridging the gap between development and deployment. I specialize in 
+          <span className="text-slate-200 font-medium"> precision testing</span>, 
+          automated validation, and ensuring high-performance software standards.
+        </p>
+
+        <div className="mt-12 flex flex-wrap justify-center gap-6">
+          <AnimatedButton href="#projects">
+            Analyze My Work
+          </AnimatedButton>
+          <AnimatedButton href="#contact">
+            Get In Touch
+          </AnimatedButton>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

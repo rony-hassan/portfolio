@@ -66,7 +66,7 @@ export default function Navbar() {
         {/* Logo */}
         <button
           onClick={() => handleScrollToSection("#home")}
-          className="text-2xl font-bold text-indigo-500 cursor-pointer"
+          className="text-2xl font-bold text-white-500 cursor-pointer"
         >
           Rony
         </button>
@@ -79,15 +79,15 @@ export default function Navbar() {
                 onClick={() => handleScrollToSection(link.href)}
                 className={`font-medium transition-colors duration-300 cursor-pointer ${
                   activeSection === link.href
-                    ? "text-indigo-500"
-                    : "text-slate-900 dark:text-white hover:text-indigo-500"
+                    ? "text-cyan-500"
+                    : "text-slate-900 dark:text-white hover:text-cyan-500"
                 }`}
               >
                 {link.label}
 
                 {/* Animated underline */}
                 <span
-                  className={`absolute left-0 -bottom-1 h-0.5 bg-indigo-500 transition-all duration-300 ${
+                  className={`absolute left-0 -bottom-1 h-0.5 bg-cyan-500 transition-all duration-300 ${
                     activeSection === link.href
                       ? "w-full"
                       : "w-0 group-hover:w-full"

@@ -31,7 +31,7 @@ export default function SocialSidebar() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: i * 0.3 }}
           className="p-3 rounded-full bg-white/20 dark:bg-black/30 backdrop-blur-md border border-white/30
-          text-white hover:bg-indigo-500 hover:scale-110 transition duration-300"
+          text-white hover:bg-cyan-500 hover:scale-110 transition duration-300"
         >
           {item.icon}
         </motion.a>
